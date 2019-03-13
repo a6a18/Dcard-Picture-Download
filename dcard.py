@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import os
+
 
 url = 'https://www.dcard.tw/f/sex'
 header = {
@@ -25,7 +27,10 @@ for i in href:
     for aaa in image:
         pic = requests.get(aaa["src"],headers=header)
         img2 = pic.content
-        pic_out = open("/Users/user/PycharmProjects/untitled1/venv/save/"+'img'+str(iii)+'.png','wb')  #成功將圖片下載到指定路徑
+        path = "/Users/user/PycharmProjects/untitled1/venv/save/"+str(i.get("href")[20:30])
+        if not os.path.isdir(path):
+            os.mkdir(path)
+        pic_out = open(path+'/'+i.get("href")[20:30]+'img'+str(iii)+'.png','wb')  #成功將圖片下載到指定路徑
         iii = iii + 1
         pic_out.write(img2)
         pic_out.close()
@@ -66,6 +71,16 @@ for aaa in egg:
 '''
 for i in titles:
     print(i.text)
-    
-    
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+
+"""
+如果指定目錄不存在就建立目錄
+要不然的話就直接開檔案
+"""
+import os
+path = "C:\\alarm"
+if not os.path.isdir(path):
+    os.mkdir(path)
+file = open(path + "\\" + "我要開檔案.txt", "w")    
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 '''
