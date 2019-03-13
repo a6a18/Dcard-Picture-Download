@@ -25,7 +25,7 @@ for i in href:
     for aaa in image:
         pic = requests.get(aaa["src"],headers=header)
         img2 = pic.content
-        pic_out = open('img'+str(iii)+'.png','wb')
+        pic_out = open("/Users/user/PycharmProjects/untitled1/venv/save/"+'img'+str(iii)+'.png','wb')  #成功將圖片下載到指定路徑
         iii = iii + 1
         pic_out.write(img2)
         pic_out.close()
