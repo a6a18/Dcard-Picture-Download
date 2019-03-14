@@ -16,7 +16,7 @@ titles = soup.select('h3')
 href = soup.select('div.PostList_entry_1rq5Lf a.PostEntry_root_V6g0rd')
 
 iii=0
-
+jjj=0
 
 for i in href:
     a = i.get("href")[6:18]
@@ -24,10 +24,12 @@ for i in href:
     html1 = requests.get(url1,headers=header)
     fib_text = BeautifulSoup(html1.text,'html.parser')
     image = fib_text.select("div.Post_content_NKEl9d div div div img.GalleryImage_image_3lGzO5")
+    image3 = fib_text.select("div.CommentEntry_content_1ATrw1 div div div img.GalleryImage_image_3lGzO5")
     for aaa in image:
         pic = requests.get(aaa["src"],headers=header)
         img2 = pic.content
         path = "/Users/user/PycharmProjects/untitled1/venv/save/"+str(i.get("href")[20:30])
+        path2 = path + "/留言"
         if not os.path.isdir(path):
             os.mkdir(path)
         pic_out = open(path+'/'+i.get("href")[20:30]+'img'+str(iii)+'.png','wb')  #成功將圖片下載到指定路徑
@@ -35,6 +37,19 @@ for i in href:
         pic_out.write(img2)
         pic_out.close()
         print(aaa.get("src"))
+
+    for bbb in image3:
+        pic = requests.get(bbb["src"], headers=header)
+        img2 = pic.content
+        path = "/Users/user/PycharmProjects/untitled1/venv/save/" + str(i.get("href")[20:30])
+        path2 = path + "/留言"
+        if not os.path.isdir(path2):
+            os.mkdir(path2)
+        pic_out2 = open(path2 + '/' + i.get("href")[20:30] + 'img' + str(jjj) + '.png', 'wb')
+        jjj = jjj + 1
+        pic_out2.write(img2)
+        pic_out2.close()
+
     #print(url1)
     #print(html1.status_code)
     #print(i.get("href")[0:18]+"  "+i.get("href")[20:30])
